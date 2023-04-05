@@ -1,0 +1,23 @@
+{
+  "name": "PlaybackRate",
+  "version": "1.0.0",
+  "description": "快放，慢放，倒放",
+  "main": "index.js",
+  "repository": "https://github.com/BetterNCM/boilerplate",
+  "author": "MicroBlock <microblock@qq.com>",
+  "license": "GPL-3.0-or-later",
+  "private": false,
+  "dependencies": {
+
+  },
+  "devDependencies": {
+    "@types/react": "^18.0.29",
+    "@types/react-dom": "^18.0.11",
+    "esbuild": "^0.17.13"
+  },
+  "scripts": {
+    "build:dev": "esbuild ./src/main.tsx ./src/style.css ./src/startup_script.ts --bundle --outdir=./ --sourcemap=inline --watch --target=chrome91",
+    "build": "esbuild ./src/main.tsx ./src/startup_script.ts ./src/style.css --bundle --minify --outdir=dist --target=chrome91",
+    "analyze": "esbuild --bundle ./src/main.tsx --outdir=dist --minify --analyze=verbose"
+  }
+}
