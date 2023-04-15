@@ -1,23 +1,11 @@
 import { PopupConfigWin } from "./ui/popup";
 
-plugin.onAllPluginsLoaded(function () {
+plugin.onAllPluginsLoaded(function(){
     !(async () => {
         const btnVolume = await betterncm.utils.waitForElement('.spk.f-vc.f-cp.j-vol');
         const btnSettings: HTMLButtonElement = btnVolume.cloneNode(true) as any;
         btnSettings.querySelector('use').setAttribute('xlink:href', 'orpheus://orpheus/style/res/svg/topbar.sp.svg#set');
         btnSettings!.classList.add('playbackrate-settings');
-
-        const btns = [...document.querySelector("#main-player").children]
-            .filter(a => a.getBoundingClientRect().height === 24)
-            .sort((a, b) => a.getBoundingClientRect().x - b.getBoundingClientRect().x);
-        const sortedBtn = btns.map((v, i) => {
-            const dist = v.getBoundingClientRect().x - (btns[i - 1])?.getBoundingClientRect().x;
-            if (isNaN(dist)) return [0, v]
-            return [dist, v]
-            //@ts-ignore
-        }).sort((a, b) => (b[0] - a[0])) as unknown as HTMLButtonElement[]
-
-        btnSettings.style.right = `${sortedBtn[0][1].getBoundingClientRect().x - btnSettings.getBoundingClientRect().width - 20}px`;
         btnVolume.parentElement.appendChild(btnSettings);
 
         const stylesheet = document.createElement('style');
